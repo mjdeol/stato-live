@@ -1,0 +1,27 @@
+name: Collecte données PMU
+
+on:
+  schedule:
+    - cron: '0 7 * * *'   # 8h Paris
+    - cron: '0 10 * * *'  # 11h Paris
+  workflow_dispatch:       # Lancement manuel possible
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-pmu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Collecter données PMU
+        run: python fetch_pmu.py
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "données PMU du jour"
+          file_pattern: live.json
+          commit_user_name: "STATO Bot"
+          commit_user_email: "stato-bot@users.noreply.github.com"
