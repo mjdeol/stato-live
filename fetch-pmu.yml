@@ -2,9 +2,9 @@ name: Collecte données PMU
 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 8h Paris
-    - cron: '0 10 * * *'  # 11h Paris
-  workflow_dispatch:       # Lancement manuel possible
+    - cron: '0 7 * * *'
+    - cron: '0 10 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
